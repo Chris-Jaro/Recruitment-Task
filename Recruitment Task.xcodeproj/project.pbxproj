@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8315B6912583E95400BCCE85 /* CommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8315B68F2583E95400BCCE85 /* CommitCell.swift */; };
+		8315B6922583E95400BCCE85 /* CommitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8315B6902583E95400BCCE85 /* CommitCell.xib */; };
 		83A7EB26258288F20014A5D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7EB25258288F20014A5D2 /* AppDelegate.swift */; };
 		83A7EB28258288F20014A5D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7EB27258288F20014A5D2 /* SceneDelegate.swift */; };
 		83A7EB2A258288F20014A5D2 /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7EB29258288F20014A5D2 /* FirstController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8315B68F2583E95400BCCE85 /* CommitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitCell.swift; sourceTree = "<group>"; };
+		8315B6902583E95400BCCE85 /* CommitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommitCell.xib; sourceTree = "<group>"; };
 		83A7EB22258288F20014A5D2 /* Recruitment Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recruitment Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A7EB25258288F20014A5D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83A7EB27258288F20014A5D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 				83A7EB33258288F70014A5D2 /* Info.plist */,
 				83A7EB4125829D1A0014A5D2 /* RepositoryCell.swift */,
 				83A7EB4225829D1A0014A5D2 /* RepositoryCell.xib */,
+				8315B68F2583E95400BCCE85 /* CommitCell.swift */,
+				8315B6902583E95400BCCE85 /* CommitCell.xib */,
 			);
 			path = "Recruitment Task";
 			sourceTree = "<group>";
@@ -134,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83A7EB32258288F70014A5D2 /* LaunchScreen.storyboard in Resources */,
+				8315B6922583E95400BCCE85 /* CommitCell.xib in Resources */,
 				83A7EB2F258288F70014A5D2 /* Assets.xcassets in Resources */,
 				83A7EB2D258288F20014A5D2 /* Main.storyboard in Resources */,
 				83A7EB4425829D1A0014A5D2 /* RepositoryCell.xib in Resources */,
@@ -149,6 +156,7 @@
 			files = (
 				83A7EB4325829D1A0014A5D2 /* RepositoryCell.swift in Sources */,
 				83A7EB2A258288F20014A5D2 /* FirstController.swift in Sources */,
+				8315B6912583E95400BCCE85 /* CommitCell.swift in Sources */,
 				83A7EB3D258295FC0014A5D2 /* SecondController.swift in Sources */,
 				83A7EB26258288F20014A5D2 /* AppDelegate.swift in Sources */,
 				83A7EB28258288F20014A5D2 /* SceneDelegate.swift in Sources */,

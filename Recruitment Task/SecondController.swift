@@ -25,6 +25,11 @@ class SecondController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.register(UINib(nibName: "CommitCell", bundle: nil), forCellReuseIdentifier: "CommitCell")
+        
         viewOnlineButton.layer.cornerRadius = 15
         shareRepoButton.layer.cornerRadius = 10
         
@@ -43,4 +48,24 @@ class SecondController: UIViewController {
     }
     */
 
+}
+
+
+//MARK: - TableView DataSource Methods
+extension SecondController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommitCell", for: indexPath) as! CommitCell
+        return cell
+    }
+
+}
+
+
+//MARK: - TableView Delgate Methods
+extension SecondController: UITableViewDelegate {
+    
 }
