@@ -30,6 +30,9 @@ class SecondController: UIViewController {
         
         tableView.register(UINib(nibName: "CommitCell", bundle: nil), forCellReuseIdentifier: "CommitCell")
         
+        tableView.estimatedRowHeight = 90.0
+        tableView.rowHeight = UITableView.automaticDimension
+        
         viewOnlineButton.layer.cornerRadius = 15
         shareRepoButton.layer.cornerRadius = 10
         
@@ -54,11 +57,16 @@ class SecondController: UIViewController {
 //MARK: - TableView DataSource Methods
 extension SecondController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommitCell", for: indexPath) as! CommitCell
+        cell.numberLabel.text = "\(indexPath.row + 1)"
+        cell.numberLabel.layer.cornerRadius = 20
+        if indexPath.row != 1 {
+            cell.commitMessage.text = "This is a commit message that needs to fold over to the next line."
+        }
         return cell
     }
 

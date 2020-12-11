@@ -9,6 +9,11 @@ import UIKit
 
 class CommitCell: UITableViewCell {
 
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var commitAuthorName: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var commitMessage: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -3,30 +3,80 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommitCell" id="KGk-i7-Jjw" customClass="CommitCell" customModule="Recruitment_Task" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommitCell" id="KGk-i7-Jjw" customClass="CommitCell" customModule="Recruitment_Task" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="377" height="95"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="377" height="95"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNY-8Q-ITO">
-                        <rect key="frame" x="139" y="12" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email@authorname.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNY-8Q-ITO">
+                        <rect key="frame" x="85" y="32" width="176" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eaa-59-gOV">
+                        <rect key="frame" x="25" y="25" width="40" height="40"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Il0-vZ-Vub"/>
+                            <constraint firstAttribute="width" constant="40" id="KgA-X4-evb"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a short commit message." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sh1-li-hUA">
+                        <rect key="frame" x="85" y="57" width="267" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMMIT AUTHOR NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRY-T3-8Hp">
+                        <rect key="frame" x="85" y="15" width="123" height="12"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                        <color key="textColor" name="AccentColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="lRY-T3-8Hp" firstAttribute="leading" secondItem="Eaa-59-gOV" secondAttribute="trailing" constant="20" id="2ug-Qe-b43"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="sh1-li-hUA" secondAttribute="bottom" constant="7.5" id="5oW-rJ-LbC"/>
+                    <constraint firstItem="rNY-8Q-ITO" firstAttribute="top" secondItem="lRY-T3-8Hp" secondAttribute="bottom" constant="5" id="CIy-17-f2B"/>
+                    <constraint firstItem="Eaa-59-gOV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="EDH-cZ-RYa"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="sh1-li-hUA" secondAttribute="trailing" constant="5" id="MDl-yi-SSY"/>
+                    <constraint firstItem="sh1-li-hUA" firstAttribute="top" secondItem="rNY-8Q-ITO" secondAttribute="bottom" constant="5" id="Nb0-4h-s21"/>
+                    <constraint firstItem="Eaa-59-gOV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="V19-tA-ehL"/>
+                    <constraint firstItem="sh1-li-hUA" firstAttribute="leading" secondItem="Eaa-59-gOV" secondAttribute="trailing" constant="20" id="exX-9y-tdE"/>
+                    <constraint firstItem="lRY-T3-8Hp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="iAh-EW-EFa"/>
+                    <constraint firstItem="rNY-8Q-ITO" firstAttribute="leading" secondItem="Eaa-59-gOV" secondAttribute="trailing" constant="20" id="w93-eY-IGo"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="20" y="109"/>
+            <connections>
+                <outlet property="commitAuthorName" destination="lRY-T3-8Hp" id="Wdn-xu-NqZ"/>
+                <outlet property="commitMessage" destination="sh1-li-hUA" id="DJ2-cV-W7o"/>
+                <outlet property="emailLabel" destination="rNY-8Q-ITO" id="f2r-zB-UTt"/>
+                <outlet property="numberLabel" destination="Eaa-59-gOV" id="Cxe-sf-efh"/>
+            </connections>
+            <point key="canvasLocation" x="12.318840579710146" y="85.379464285714278"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

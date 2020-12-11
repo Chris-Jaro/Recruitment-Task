@@ -24,7 +24,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YrW-fJ-oFt" userLabel="Table">
                                 <rect key="frame" x="20" y="172" width="374" height="564"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0DE-Cs-pNY">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0DE-Cs-pNY">
                                         <rect key="frame" x="0.0" y="41.333333333333314" width="374" height="522.66666666666674"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -137,7 +137,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N1i-oV-d7Q">
-                                <rect key="frame" x="20" y="353.66666666666674" width="389" height="307.33333333333326"/>
+                                <rect key="frame" x="20" y="353.66666666666674" width="389" height="302.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDh-Ja-Nhx">
@@ -169,7 +169,7 @@
                             <constraint firstItem="vmJ-MS-UjA" firstAttribute="top" secondItem="6a9-pa-Rwu" secondAttribute="bottom" constant="40" id="WTc-0f-7v1"/>
                             <constraint firstItem="N1i-oV-d7Q" firstAttribute="leading" secondItem="kDm-o7-Rrc" secondAttribute="leading" constant="20" id="WVJ-z5-AWG"/>
                             <constraint firstItem="KFc-uT-OF0" firstAttribute="leading" secondItem="kDm-o7-Rrc" secondAttribute="leading" constant="20" id="XzW-76-TLa"/>
-                            <constraint firstItem="IDh-Ja-Nhx" firstAttribute="top" secondItem="N1i-oV-d7Q" secondAttribute="bottom" constant="15" id="bXZ-be-uP6"/>
+                            <constraint firstItem="IDh-Ja-Nhx" firstAttribute="top" secondItem="N1i-oV-d7Q" secondAttribute="bottom" constant="20" id="bXZ-be-uP6"/>
                             <constraint firstItem="6eH-2b-brc" firstAttribute="top" secondItem="vmJ-MS-UjA" secondAttribute="bottom" constant="20" id="dHP-T6-a4m"/>
                             <constraint firstItem="jwA-nY-6RK" firstAttribute="top" secondItem="jO5-D7-gT8" secondAttribute="bottom" constant="15" id="eIw-SV-m7o"/>
                             <constraint firstItem="kDm-o7-Rrc" firstAttribute="trailing" secondItem="N1i-oV-d7Q" secondAttribute="trailing" constant="5" id="f3O-kQ-LvH"/>
