@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FirstController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
