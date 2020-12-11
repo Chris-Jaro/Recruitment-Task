@@ -179,13 +179,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="mpk-V5-sQG"/>
                     <connections>
+                        <outlet property="imageView" destination="jO5-D7-gT8" id="Ghq-Zp-Izh"/>
+                        <outlet property="repoAuthorName" destination="Hpx-Jw-JiN" id="QHP-in-fwP"/>
+                        <outlet property="repoTitle" destination="vmJ-MS-UjA" id="H98-po-1eh"/>
                         <outlet property="shareRepoButton" destination="IDh-Ja-Nhx" id="YlM-Xy-oAH"/>
+                        <outlet property="starsLabel" destination="fnu-RI-wbd" id="X5k-Bm-joB"/>
+                        <outlet property="tableView" destination="N1i-oV-d7Q" id="SUC-0L-NwU"/>
                         <outlet property="viewOnlineButton" destination="jwA-nY-6RK" id="pch-az-dB8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a2O-6e-wVC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1868" y="93.103448275862078"/>
+            <point key="canvasLocation" x="1866.6666666666667" y="92.934782608695656"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qiy-4i-SRo">

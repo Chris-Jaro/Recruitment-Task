@@ -11,6 +11,11 @@ class SecondController: UIViewController {
     
     @IBOutlet weak var viewOnlineButton: UIButton!
     @IBOutlet weak var shareRepoButton: UIButton!
+    @IBOutlet weak var repoAuthorName: UILabel!
+    @IBOutlet weak var starsLabel: UILabel!
+    @IBOutlet weak var repoTitle: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var imageView: UIImageView!
     
     
     override func viewDidAppear(_ animated: Bool) {
