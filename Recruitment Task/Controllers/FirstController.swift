@@ -9,6 +9,8 @@ import UIKit
 
 class FirstController: UIViewController {
     
+    var clickedRepoCommitsURL: String = ""
+    
     var repositories: [RepoModel] = []
     
     let queryURL = "https://api.github.com/search/repositories?q=swift&per_page=7"
@@ -50,7 +52,6 @@ class FirstController: UIViewController {
                     }
                 }
             }
-            
             task.resume()
         }
         
@@ -61,6 +62,14 @@ class FirstController: UIViewController {
             repositories.append(RepoModel(repoName: item.name, repoOwner: item.owner.login, repoOwnerAvarat: item.owner.avatar_url, html_url: item.html_url, commits_url: item.commits_url, starNumber: item.stargazers_count))
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToTwo" {
+            if let desinationVC = segue.destination as? SecondController{
+                desinationVC.commitsURL = clickedRepoCommitsURL
             }
         }
     }
@@ -91,6 +100,7 @@ extension FirstController: UITableViewDataSource{
 //MARK: - TableView Delegate Methods
 extension FirstController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        clickedRepoCommitsURL = repositories[indexPath.section].commits_url
         performSegue(withIdentifier: "GoToTwo", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -105,7 +115,7 @@ extension FirstController: UITableViewDelegate{
     }
     
 }
-
+//MARK: - Extension for image downloading
 extension UIImageView {
     func downloaded(from url: URL) {
         URLSession.shared.dataTask(with: url) { data, response, error in
