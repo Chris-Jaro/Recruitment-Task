@@ -19,6 +19,7 @@
 		83A7EB4325829D1A0014A5D2 /* RepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7EB4125829D1A0014A5D2 /* RepositoryCell.swift */; };
 		83A7EB4425829D1A0014A5D2 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A7EB4225829D1A0014A5D2 /* RepositoryCell.xib */; };
 		83CB4B1E258505DA000800FD /* RepoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB4B1D258505DA000800FD /* RepoData.swift */; };
+		83CB4B2125850A4C000800FD /* RepoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB4B2025850A4C000800FD /* RepoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		83A7EB4125829D1A0014A5D2 /* RepositoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCell.swift; sourceTree = "<group>"; };
 		83A7EB4225829D1A0014A5D2 /* RepositoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepositoryCell.xib; sourceTree = "<group>"; };
 		83CB4B1D258505DA000800FD /* RepoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoData.swift; sourceTree = "<group>"; };
+		83CB4B2025850A4C000800FD /* RepoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				8315B68F2583E95400BCCE85 /* CommitCell.swift */,
 				8315B6902583E95400BCCE85 /* CommitCell.xib */,
 				83CB4B1D258505DA000800FD /* RepoData.swift */,
+				83CB4B2025850A4C000800FD /* RepoModel.swift */,
 			);
 			path = "Recruitment Task";
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83A7EB4325829D1A0014A5D2 /* RepositoryCell.swift in Sources */,
+				83CB4B2125850A4C000800FD /* RepoModel.swift in Sources */,
 				83A7EB2A258288F20014A5D2 /* FirstController.swift in Sources */,
 				8315B6912583E95400BCCE85 /* CommitCell.swift in Sources */,
 				83A7EB3D258295FC0014A5D2 /* SecondController.swift in Sources */,

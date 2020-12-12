@@ -9,6 +9,8 @@ import UIKit
 
 class FirstController: UIViewController {
     
+    var repositories: [RepoModel] = []
+    
     let queryURL = "https://api.github.com/search/repositories?q=swift"
     
     @IBOutlet weak var tableView: UITableView!
@@ -80,7 +82,11 @@ extension FirstController: UITableViewDelegate{
                     let jsonDecoder = JSONDecoder()
                     do {
                         let decodedData = try jsonDecoder.decode(RepoData.self, from: safeData)
-                        print(decodedData)
+                        
+                        for item in decodedData.items{
+                            self.repositories.append(RepoModel(repoName: item.name, repoOwner: item.owner.login, repoOwnerAvarat: item.owner.avatar_url, html_url: item.html_url, commits_url: item.commits_url, starNumber: item.stargazers_count))
+                        }
+                        print(self.repositories[0])
                         
                     } catch {
                         print(error)
