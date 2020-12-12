@@ -9,6 +9,7 @@ import UIKit
 
 class RepositoryCell: UITableViewCell {
 
+    @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var repoTitle: UILabel!
     @IBOutlet weak var starsNumber: UILabel!
     

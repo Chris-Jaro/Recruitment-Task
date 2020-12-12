@@ -11,22 +11,22 @@ class FirstController: UIViewController {
     
     var repositories: [RepoModel] = []
     
-    let queryURL = "https://api.github.com/search/repositories?q=swift"
+    let queryURL = "https://api.github.com/search/repositories?q=swift&per_page=7"
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
         searchBar.backgroundImage = UIImage() // Removes the 1px line
         
-//        DispatchQueue.main.async {
-//            self.performRequest(with: self.queryURL)
-//        }
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.performRequest(with: self.queryURL)
+        }
     }
 
     func performRequest(with urlString:String) {
@@ -44,28 +44,32 @@ class FirstController: UIViewController {
                     let jsonDecoder = JSONDecoder()
                     do {
                         let decodedData = try jsonDecoder.decode(RepoData.self, from: safeData)
-                        
-                        for item in decodedData.items{
-                            self.repositories.append(RepoModel(repoName: item.name, repoOwner: item.owner.login, repoOwnerAvarat: item.owner.avatar_url, html_url: item.html_url, commits_url: item.commits_url, starNumber: item.stargazers_count))
-                        }
-                        print(self.repositories[0])
-                        
+                        self.decodeJSON(from: decodedData)
                     } catch {
                         print(error)
                     }
                 }
             }
-        
+            
             task.resume()
         }
+        
     }
     
+    func decodeJSON(from data:RepoData){
+        for item in data.items{
+            repositories.append(RepoModel(repoName: item.name, repoOwner: item.owner.login, repoOwnerAvarat: item.owner.avatar_url, html_url: item.html_url, commits_url: item.commits_url, starNumber: item.stargazers_count))
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 }
 //MARK: - TableView DataSource Methods
 extension FirstController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return repositories.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,9 +79,9 @@ extension FirstController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath) as! RepositoryCell
         cell.layer.cornerRadius = 15
-//        cell.repoTitle.text = repositories[indexPath.section].repoName
-//        cell.starsNumber.text = "\(repositories[indexPath.section].starNumber)"
-//        cell.imageView Taking the image from the internet
+        cell.repoTitle.text = repositories[indexPath.section].repoName
+        cell.starsNumber.text = "\(repositories[indexPath.section].starNumber)"
+        cell.photo.downloaded(from: repositories[indexPath.section].repoOwnerAvarat)
         return cell
     }
     
@@ -102,3 +106,22 @@ extension FirstController: UITableViewDelegate{
     
 }
 
+extension UIImageView {
+    func downloaded(from url: URL) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.image = image
+            }
+        }.resume()
+    }
+    func downloaded(from link: String) {
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url)
+    }
+}

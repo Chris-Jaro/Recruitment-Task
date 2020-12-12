@@ -86,9 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				83A7EB2B258288F20014A5D2 /* Main.storyboard */,
-				83A7EB4125829D1A0014A5D2 /* RepositoryCell.swift */,
 				83A7EB4225829D1A0014A5D2 /* RepositoryCell.xib */,
 				8315B68F2583E95400BCCE85 /* CommitCell.swift */,
+				83A7EB4125829D1A0014A5D2 /* RepositoryCell.swift */,
 				8315B6902583E95400BCCE85 /* CommitCell.xib */,
 			);
 			path = View;
