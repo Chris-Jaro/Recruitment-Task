@@ -72,20 +72,44 @@
 			children = (
 				83A7EB25258288F20014A5D2 /* AppDelegate.swift */,
 				83A7EB27258288F20014A5D2 /* SceneDelegate.swift */,
-				83A7EB29258288F20014A5D2 /* FirstController.swift */,
-				83A7EB3C258295FC0014A5D2 /* SecondController.swift */,
-				83A7EB2B258288F20014A5D2 /* Main.storyboard */,
+				83CB4B26258511EF000800FD /* Model */,
+				83CB4B23258511AB000800FD /* View */,
+				83CB4B25258511CF000800FD /* Controllers */,
 				83A7EB2E258288F70014A5D2 /* Assets.xcassets */,
 				83A7EB30258288F70014A5D2 /* LaunchScreen.storyboard */,
 				83A7EB33258288F70014A5D2 /* Info.plist */,
+			);
+			path = "Recruitment Task";
+			sourceTree = "<group>";
+		};
+		83CB4B23258511AB000800FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83A7EB2B258288F20014A5D2 /* Main.storyboard */,
 				83A7EB4125829D1A0014A5D2 /* RepositoryCell.swift */,
 				83A7EB4225829D1A0014A5D2 /* RepositoryCell.xib */,
 				8315B68F2583E95400BCCE85 /* CommitCell.swift */,
 				8315B6902583E95400BCCE85 /* CommitCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		83CB4B25258511CF000800FD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				83A7EB29258288F20014A5D2 /* FirstController.swift */,
+				83A7EB3C258295FC0014A5D2 /* SecondController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		83CB4B26258511EF000800FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				83CB4B1D258505DA000800FD /* RepoData.swift */,
 				83CB4B2025850A4C000800FD /* RepoModel.swift */,
 			);
-			path = "Recruitment Task";
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
