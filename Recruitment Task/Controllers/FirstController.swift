@@ -114,7 +114,7 @@ extension FirstController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.white
+        headerView.backgroundColor = UIColor.systemBackground
         return headerView
     }
     

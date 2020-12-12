@@ -48,13 +48,52 @@ class SecondController: UIViewController {
 
     }
 
-    
     @IBAction func viewOnlineButtonPressed(_ sender: UIButton) {
         if let url = URL(string: repoURL) {
             UIApplication.shared.open(url)
         }
     }
+
     
+    @IBAction func shareRepoButtonPressed(_ sender: UIButton) {
+        
+            let firstActivityItem = "Repo Title"
+
+            let secondActivityItem : NSURL = NSURL(string: repoURL)!
+            
+//            // If you want to use an image
+//            let image : UIImage = UIImage(named: "your-image-name")!
+        
+            let activityViewController : UIActivityViewController = UIActivityViewController(
+                activityItems: [firstActivityItem, secondActivityItem], applicationActivities: nil)
+            
+            // This lines is for the popover you need to show in iPad
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            // This line remove the arrow of the popover to show in iPad
+            
+            
+            // Pre-configuring activity items
+            activityViewController.activityItemsConfiguration = [
+            UIActivity.ActivityType.message
+            ] as? UIActivityItemsConfigurationReading
+            
+            // Anything you want to exclude
+            activityViewController.excludedActivityTypes = [
+                UIActivity.ActivityType.postToWeibo,
+                UIActivity.ActivityType.print,
+                UIActivity.ActivityType.assignToContact,
+                UIActivity.ActivityType.saveToCameraRoll,
+                UIActivity.ActivityType.addToReadingList,
+                UIActivity.ActivityType.postToFlickr,
+                UIActivity.ActivityType.postToVimeo,
+                UIActivity.ActivityType.postToTencentWeibo,
+                UIActivity.ActivityType.postToFacebook
+            ]
+            
+            activityViewController.isModalInPresentation = true
+            self.present(activityViewController, animated: true, completion: nil)
+        
+    }
     
     func performRequest(with urlString:String) {
         let adjustedURL = urlString.replacingOccurrences(of: "{/sha}", with: "?per_page=4")

@@ -3,6 +3,7 @@
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -144,16 +145,20 @@
                                 <rect key="frame" x="20" y="353.66666666666674" width="389" height="302.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDh-Ja-Nhx">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IDh-Ja-Nhx">
                                 <rect key="frame" x="20" y="676" width="374" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Skb-ZD-UJ0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="  Share Repo" image="square.and.arrow.up" catalog="system">
+                                <state key="normal" title="  Share Repo">
                                     <color key="titleColor" name="AccentColor"/>
+                                    <imageReference key="image" image="square.and.arrow.up" catalog="system" symbolScale="medium"/>
                                 </state>
+                                <connections>
+                                    <action selector="shareRepoButtonPressed:" destination="7K3-LD-m4W" eventType="touchUpInside" id="dXe-MK-dNA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kDm-o7-Rrc"/>
