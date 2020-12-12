@@ -9,7 +9,9 @@ import UIKit
 
 class SecondController: UIViewController {
     
+    
     var commitsURL: String = ""
+    var repoURL: String = ""
     var commits: [CommitModel] = []
     
     @IBOutlet weak var viewOnlineButton: UIButton!
@@ -46,6 +48,14 @@ class SecondController: UIViewController {
 
     }
 
+    
+    @IBAction func viewOnlineButtonPressed(_ sender: UIButton) {
+        if let url = URL(string: repoURL) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    
     func performRequest(with urlString:String) {
         let adjustedURL = urlString.replacingOccurrences(of: "{/sha}", with: "?per_page=4")
         if let url = URL(string: adjustedURL){

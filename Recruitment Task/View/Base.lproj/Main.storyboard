@@ -78,8 +78,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="jO5-D7-gT8">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jO5-D7-gT8">
+                                <rect key="frame" x="0.0" y="1.6666666666666572" width="414" height="247"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jO5-D7-gT8" secondAttribute="height" multiplier="207:125" id="P9W-Kq-uaC"/>
                                 </constraints>
@@ -95,6 +96,9 @@
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <state key="normal" title="  VIEW ONLINE  "/>
+                                <connections>
+                                    <action selector="viewOnlineButtonPressed:" destination="7K3-LD-m4W" eventType="touchUpInside" id="Oxs-O5-Bl8"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REPO BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFc-uT-OF0">
                                 <rect key="frame" x="20" y="136" width="64" height="18"/>
@@ -215,7 +219,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="image" width="1708" height="998"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="AccentColor">

@@ -10,6 +10,7 @@ import UIKit
 class FirstController: UIViewController {
     
     var clickedRepoCommitsURL: String = ""
+    var clickedRepoURL: String = ""
     
     var repositories: [RepoModel] = []
     
@@ -70,6 +71,7 @@ class FirstController: UIViewController {
         if segue.identifier == "GoToTwo" {
             if let desinationVC = segue.destination as? SecondController{
                 desinationVC.commitsURL = clickedRepoCommitsURL
+                desinationVC.repoURL = clickedRepoURL
             }
         }
     }
@@ -90,6 +92,7 @@ extension FirstController: UITableViewDataSource{
         cell.layer.cornerRadius = 15
         cell.repoTitle.text = repositories[indexPath.section].repoName
         cell.starsNumber.text = "\(repositories[indexPath.section].starNumber)"
+        cell.photo.layer.cornerRadius = 10
         cell.photo.downloaded(from: repositories[indexPath.section].repoOwnerAvarat)
         return cell
     }
@@ -100,6 +103,7 @@ extension FirstController: UITableViewDataSource{
 //MARK: - TableView Delegate Methods
 extension FirstController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        clickedRepoURL = repositories[indexPath.section].html_url
         clickedRepoCommitsURL = repositories[indexPath.section].commits_url
         performSegue(withIdentifier: "GoToTwo", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
