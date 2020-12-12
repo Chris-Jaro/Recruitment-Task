@@ -9,6 +9,8 @@ import UIKit
 
 class FirstController: UIViewController {
     
+    let queryURL = "https://api.github.com/search/repositories?q=swift"
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
 
@@ -21,6 +23,8 @@ class FirstController: UIViewController {
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
         
         searchBar.backgroundImage = UIImage() // Removes the 1px line
+    
+        performRequest(with: queryURL)
     }
 
     
@@ -59,6 +63,33 @@ extension FirstController: UITableViewDelegate{
         let headerView = UIView()
         headerView.backgroundColor = UIColor.white
         return headerView
+    }
+    
+    func performRequest(with urlString:String) {
+        if let url = URL(string: urlString){
+            
+            let session = URLSession(configuration: .default)
+            
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil{
+                    print(error!)
+                    return
+                }
+                
+                if let safeData = data{
+                    let jsonDecoder = JSONDecoder()
+                    do {
+                        let decodedData = try jsonDecoder.decode(RepoData.self, from: safeData)
+                        print(decodedData)
+                        
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+        
+            task.resume()
+        }
     }
 }
 
