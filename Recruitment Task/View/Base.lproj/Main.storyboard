@@ -20,7 +20,7 @@
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="IRm-y3-a73">
                                 <rect key="frame" x="10" y="96" width="394" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YrW-fJ-oFt" userLabel="Table">
                                 <rect key="frame" x="20" y="172" width="374" height="564"/>

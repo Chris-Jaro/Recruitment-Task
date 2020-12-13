@@ -9,9 +9,13 @@ import UIKit
 
 class SecondController: UIViewController {
     
-    
+    var repoPhotoURL: String = ""
+    var chosenRepoAuthorname: String = "Repo Author Name"
+    var numberOfStars: String = "234"
+    var chosenRepoTitle: String = "Repo Title"
     var commitsURL: String = ""
     var repoURL: String = ""
+    
     var commits: [CommitModel] = []
     
     @IBOutlet weak var viewOnlineButton: UIButton!
@@ -40,6 +44,12 @@ class SecondController: UIViewController {
         viewOnlineButton.layer.cornerRadius = 15
         shareRepoButton.layer.cornerRadius = 10
         
+        repoAuthorName.text = chosenRepoAuthorname
+        starsLabel.text = "Number of Stars (\(numberOfStars))"
+        repoTitle.text = chosenRepoTitle
+        imageView.downloaded(from: repoPhotoURL)
+        
+        
         navigationController?.navigationBar.tintColor = UIColor.white //These two lines change the batery color to white
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -57,15 +67,14 @@ class SecondController: UIViewController {
     
     @IBAction func shareRepoButtonPressed(_ sender: UIButton) {
         
-            let firstActivityItem = "Repo Title"
+            let firstActivityItem = chosenRepoTitle
 
             let secondActivityItem : NSURL = NSURL(string: repoURL)!
-            
-//            // If you want to use an image
-//            let image : UIImage = UIImage(named: "your-image-name")!
+        
+            let image: UIImage = imageView.image!
         
             let activityViewController : UIActivityViewController = UIActivityViewController(
-                activityItems: [firstActivityItem, secondActivityItem], applicationActivities: nil)
+                activityItems: [firstActivityItem, secondActivityItem, image], applicationActivities: nil)
             
             // This lines is for the popover you need to show in iPad
             activityViewController.popoverPresentationController?.sourceView = self.view
@@ -96,7 +105,7 @@ class SecondController: UIViewController {
     }
     
     func performRequest(with urlString:String) {
-        let adjustedURL = urlString.replacingOccurrences(of: "{/sha}", with: "?per_page=4")
+        let adjustedURL = urlString.replacingOccurrences(of: "{/sha}", with: "?per_page=3")
         if let url = URL(string: adjustedURL){
             
             let session = URLSession(configuration: .default)

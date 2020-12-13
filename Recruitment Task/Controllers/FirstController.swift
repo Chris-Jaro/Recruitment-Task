@@ -9,12 +9,14 @@ import UIKit
 
 class FirstController: UIViewController {
     
+    var clickedRepoTitle: String = ""
+    var clickedRepoStars: Int = 0
+    var clickedRepoPhotoURL: String = ""
+    var clickedRepoAuthorName: String = ""
     var clickedRepoCommitsURL: String = ""
     var clickedRepoURL: String = ""
     
     var repositories: [RepoModel] = []
-    
-    let queryURL = "https://api.github.com/search/repositories?q=swift&per_page=7"
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -26,12 +28,18 @@ class FirstController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
         searchBar.backgroundImage = UIImage() // Removes the 1px line
+        searchBar.delegate = self
         
+        loadRepos()
+    }
+    
+    func loadRepos(for query: String = "Swift"){
+        let queryURL = "https://api.github.com/search/repositories?q=\(query)&per_page=7"
         DispatchQueue.global(qos: .userInitiated).async {
-            self.performRequest(with: self.queryURL)
+            self.performRequest(with: queryURL)
         }
     }
-
+    
     func performRequest(with urlString:String) {
         if let url = URL(string: urlString){
             
@@ -72,10 +80,31 @@ class FirstController: UIViewController {
             if let desinationVC = segue.destination as? SecondController{
                 desinationVC.commitsURL = clickedRepoCommitsURL
                 desinationVC.repoURL = clickedRepoURL
+                desinationVC.chosenRepoAuthorname = clickedRepoAuthorName
+                desinationVC.chosenRepoTitle = clickedRepoTitle
+                desinationVC.numberOfStars = "\(clickedRepoStars)"
+                desinationVC.repoPhotoURL = clickedRepoPhotoURL
+                
             }
         }
     }
 }
+
+//MARK: - SearchBar Delegate Methods
+extension FirstController: UISearchBarDelegate{
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if let searchQuery = searchBar.text, searchBar.text?.count != 0{
+            repositories = [] // to show only the data of the query and not append it to the previous query results
+            loadRepos(for: searchQuery)
+        }
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+
+
+
 //MARK: - TableView DataSource Methods
 extension FirstController: UITableViewDataSource{
     
@@ -105,6 +134,10 @@ extension FirstController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         clickedRepoURL = repositories[indexPath.section].html_url
         clickedRepoCommitsURL = repositories[indexPath.section].commits_url
+        clickedRepoTitle = repositories[indexPath.section].repoName
+        clickedRepoStars = repositories[indexPath.section].starNumber
+        clickedRepoPhotoURL = repositories[indexPath.section].repoOwnerAvarat
+        clickedRepoAuthorName = repositories[indexPath.section].repoOwner
         performSegue(withIdentifier: "GoToTwo", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
