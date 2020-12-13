@@ -22,6 +22,7 @@
 		83A7EB4425829D1A0014A5D2 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A7EB4225829D1A0014A5D2 /* RepositoryCell.xib */; };
 		83CB4B1E258505DA000800FD /* RepoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB4B1D258505DA000800FD /* RepoData.swift */; };
 		83CB4B2125850A4C000800FD /* RepoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB4B2025850A4C000800FD /* RepoModel.swift */; };
+		83E694CB2586807F003A2473 /* RepoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E694CA2586807F003A2473 /* RepoManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		83A7EB4225829D1A0014A5D2 /* RepositoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepositoryCell.xib; sourceTree = "<group>"; };
 		83CB4B1D258505DA000800FD /* RepoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoData.swift; sourceTree = "<group>"; };
 		83CB4B2025850A4C000800FD /* RepoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoModel.swift; sourceTree = "<group>"; };
+		83E694CA2586807F003A2473 /* RepoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				83CB4B2025850A4C000800FD /* RepoModel.swift */,
 				83525DE425855286006ADD2D /* CommitData.swift */,
 				83525DE7258553F1006ADD2D /* CommitModel.swift */,
+				83E694CA2586807F003A2473 /* RepoManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				83A7EB3D258295FC0014A5D2 /* SecondController.swift in Sources */,
 				83525DE525855286006ADD2D /* CommitData.swift in Sources */,
 				83A7EB26258288F20014A5D2 /* AppDelegate.swift in Sources */,
+				83E694CB2586807F003A2473 /* RepoManager.swift in Sources */,
 				83A7EB28258288F20014A5D2 /* SceneDelegate.swift in Sources */,
 				83CB4B1E258505DA000800FD /* RepoData.swift in Sources */,
 			);
