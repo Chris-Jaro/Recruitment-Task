@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct RepoData: Codable{
+struct RepoData: Decodable{
     let items: [Repo] // List of repositories
     
 }
 
-struct Repo: Codable{
+struct Repo: Decodable{
     let name: String // For getting the title of the repo
     let owner: Owner // Accessing values of the repo author
     let html_url: String // For View Online
@@ -21,7 +21,7 @@ struct Repo: Codable{
     
 }
 
-struct Owner: Codable {
+struct Owner: Decodable {
     let avatar_url: String // For getting the image
     let login: String // For getting the author name
 }

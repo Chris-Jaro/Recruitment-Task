@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct CommitData: Codable {
+struct CommitData: Decodable {
     let commit: Commit
 }
 
-struct Commit: Codable {
+struct Commit: Decodable {
     let author: Author
     let message: String
 }
 
-struct Author: Codable {
+struct Author: Decodable {
     let name: String
     let email: String
 }

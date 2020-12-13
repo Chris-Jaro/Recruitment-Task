@@ -15,7 +15,9 @@ class FirstController: UIViewController, RepoManagerDelegate {
 //    var clickedRepoAuthorName: String = ""
 //    var clickedRepoCommitsURL: String = ""
 //    var clickedRepoURL: String = ""
-//
+
+    var selectedSection: Int = 0
+
     var repositories: [RepoModel] = []
     
     var repoManager = RepoManager()
@@ -87,19 +89,20 @@ class FirstController: UIViewController, RepoManagerDelegate {
 //        }
 //    }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "GoToTwo" {
-//            if let desinationVC = segue.destination as? SecondController{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToTwo" {
+            if let desinationVC = segue.destination as? SecondController{
+                desinationVC.repoNumber = selectedSection
 //                desinationVC.commitsURL = clickedRepoCommitsURL
 //                desinationVC.repoURL = clickedRepoURL
 //                desinationVC.chosenRepoAuthorname = clickedRepoAuthorName
 //                desinationVC.chosenRepoTitle = clickedRepoTitle
 //                desinationVC.numberOfStars = "\(clickedRepoStars)"
 //                desinationVC.repoPhotoURL = clickedRepoPhotoURL
-//
-//            }
-//        }
-//    }
+
+            }
+        }
+    }
 }
 
 //MARK: - SearchBar Delegate Methods
@@ -150,6 +153,8 @@ extension FirstController: UITableViewDelegate{
 //        clickedRepoStars = repositories[indexPath.section].starNumber
 //        clickedRepoPhotoURL = repositories[indexPath.section].repoOwnerAvarat
 //        clickedRepoAuthorName = repositories[indexPath.section].repoOwner
+        
+        selectedSection = indexPath.section
         performSegue(withIdentifier: "GoToTwo", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
