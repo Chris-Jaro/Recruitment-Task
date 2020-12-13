@@ -7,122 +7,89 @@
 
 import UIKit
 
-class FirstController: UIViewController, RepoManagerDelegate {
+class FirstController: UIViewController {
     
-//    var clickedRepoTitle: String = ""
-//    var clickedRepoStars: Int = 0
-//    var clickedRepoPhotoURL: String = ""
-//    var clickedRepoAuthorName: String = ""
-//    var clickedRepoCommitsURL: String = ""
-//    var clickedRepoURL: String = ""
-
-    var selectedSection: Int = 0
-
-    var repositories: [RepoModel] = []
+    var selectedSection: Int = 0 // Creating a reference to the chosen repository
+    var repositories: [RepoModel] = [] // List of repositories to allow better functioning of the tableView
+    var repoManager = RepoManager() // Creats an instance of the RepoManager object
     
-    var repoManager = RepoManager()
-    
+    //# All the outlets form the storyBoard
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    //# These two lines changes the batery color to black
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.tintColor = UIColor.black
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar.backgroundImage = UIImage() // Removes the 1px line on the top and bottom of the searchBar
+        
+        //# TableView implementation requirements
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
+        //# SearchBar implementation requirements
+        searchBar.delegate = self
         
-        searchBar.backgroundImage = UIImage() // Removes the 1px line
-//        searchBar.delegate = self
-        
+        //# MVC implementatnion - connecting to Model
         repoManager.delegate = self
-        repoManager.fetchRepos()
+        repoManager.fetchRepos() // Provides basic list of repositories for default search query = "swift"
         
     }
     
+    //# Actions made right before performing segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToTwo" {
+            //# Changes backButton text to "Back" on the second screen
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+            
+            //# Passing selected Repository to CommitManager of secondView to perform action with this data
+            if let destinationVC = segue.destination as? SecondController{
+                destinationVC.commitManager.repository = repositories[selectedSection]
+            }
+        }
+    }
+}
+
+//MARK: - RepoManager Delegate Methods
+extension FirstController: RepoManagerDelegate{
+    //# Implementatnon of the protocol - it is triggered only when the URLRequest & jsonDecoding have been successful
     func updateUI(with list: [RepoModel]) {
+        //# Populates the tableView with 7 repositories for a given searchQuery
         repositories = list
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     
-    
-//    func loadRepos(for query: String = "Swift"){
-//        let queryURL = "https://api.github.com/search/repositories?q=\(query)&per_page=7"
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            self.performRequest(with: queryURL)
-//        }
-//    }
-    
-//    func performRequest(with urlString:String) {
-//        if let url = URL(string: urlString){
-//
-//            let session = URLSession(configuration: .default)
-//
-//            let task = session.dataTask(with: url) { (data, response, error) in
-//                if error != nil{
-//                    print(error!)
-//                    return
-//                }
-//
-//                if let safeData = data{
-//                    let jsonDecoder = JSONDecoder()
-//                    do {
-//                        let decodedData = try jsonDecoder.decode(RepoData.self, from: safeData)
-//                        self.decodeJSON(from: decodedData)
-//                    } catch {
-//                        print(error)
-//                    }
-//                }
-//            }
-//            task.resume()
-//        }
-//    }
-    
-//    func decodeJSON(from data:RepoData){
-//        for item in data.items{
-//            repositories.append(RepoModel(repoName: item.name, repoOwner: item.owner.login, repoOwnerAvarat: item.owner.avatar_url, html_url: item.html_url, commits_url: item.commits_url, starNumber: item.stargazers_count))
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToTwo" {
-            if let destinationVC = segue.destination as? SecondController{
-                destinationVC.repoNumber = selectedSection
-                destinationVC.commitsURL = repositories[selectedSection].commits_url
-//                desinationVC.commitsURL = clickedRepoCommitsURL
-//                desinationVC.repoURL = clickedRepoURL
-//                desinationVC.chosenRepoAuthorname = clickedRepoAuthorName
-//                desinationVC.chosenRepoTitle = clickedRepoTitle
-//                desinationVC.numberOfStars = "\(clickedRepoStars)"
-//                desinationVC.repoPhotoURL = clickedRepoPhotoURL
-
-            }
-        }
-    }
 }
 
-//MARK: - SearchBar Delegate Methods
-//extension FirstController: UISearchBarDelegate{
-//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        if let searchQuery = searchBar.text, searchBar.text?.count != 0{
-//            repositories = [] // to show only the data of the query and not append it to the previous query results
-//            loadRepos(for: searchQuery)
-//        }
-//    }
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        searchBar.resignFirstResponder()
-//    }
-//}
+
+//MARK: - SearchBarDelegate Methods
+extension FirstController: UISearchBarDelegate{
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        if let searchQuery = searchBar.text, searchBar.text?.count != 0{
+            repositories = [] // to show only the data of the query and not append it to the previous query results
+            repoManager.fetchRepos(for: searchQuery)
+        }
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() // Toggles the keyboard on clicking "search"
+    }
+}
 
 
 
 //MARK: - TableView DataSource Methods
 extension FirstController: UITableViewDataSource{
+    //# Using Sections here for the display in order to make the gap between the cells in the TableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return repositories.count
@@ -148,28 +115,23 @@ extension FirstController: UITableViewDataSource{
 //MARK: - TableView Delegate Methods
 extension FirstController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        clickedRepoURL = repositories[indexPath.section].html_url
-//        clickedRepoCommitsURL = repositories[indexPath.section].commits_url
-//        clickedRepoTitle = repositories[indexPath.section].repoName
-//        clickedRepoStars = repositories[indexPath.section].starNumber
-//        clickedRepoPhotoURL = repositories[indexPath.section].repoOwnerAvarat
-//        clickedRepoAuthorName = repositories[indexPath.section].repoOwner
-        
-        selectedSection = indexPath.section
+        selectedSection = indexPath.section // referenceNumber of the chosen repository
         performSegue(withIdentifier: "GoToTwo", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 10 // width of the gap between the cells
     }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        //# creates the gap between the cells
         let headerView = UIView()
         headerView.backgroundColor = UIColor.systemBackground
         return headerView
     }
     
 }
+
+
 //MARK: - Extension for image downloading
 extension UIImageView {
     func downloaded(from url: URL) {

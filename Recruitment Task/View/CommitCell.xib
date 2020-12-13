@@ -42,8 +42,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMMIT AUTHOR NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRY-T3-8Hp">
-                        <rect key="frame" x="85" y="15" width="123" height="12"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                        <rect key="frame" x="85" y="15" width="134.5" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
                         <color key="textColor" name="AccentColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -51,7 +51,6 @@
                 <constraints>
                     <constraint firstItem="lRY-T3-8Hp" firstAttribute="leading" secondItem="Eaa-59-gOV" secondAttribute="trailing" constant="20" id="2ug-Qe-b43"/>
                     <constraint firstAttribute="bottomMargin" secondItem="sh1-li-hUA" secondAttribute="bottom" constant="7.5" id="5oW-rJ-LbC"/>
-                    <constraint firstItem="rNY-8Q-ITO" firstAttribute="top" secondItem="lRY-T3-8Hp" secondAttribute="bottom" constant="5" id="CIy-17-f2B"/>
                     <constraint firstItem="Eaa-59-gOV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="EDH-cZ-RYa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="sh1-li-hUA" secondAttribute="trailing" constant="5" id="MDl-yi-SSY"/>
                     <constraint firstItem="sh1-li-hUA" firstAttribute="top" secondItem="rNY-8Q-ITO" secondAttribute="bottom" constant="5" id="Nb0-4h-s21"/>
@@ -59,6 +58,7 @@
                     <constraint firstItem="sh1-li-hUA" firstAttribute="leading" secondItem="Eaa-59-gOV" secondAttribute="trailing" constant="20" id="exX-9y-tdE"/>
                     <constraint firstItem="lRY-T3-8Hp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="iAh-EW-EFa"/>
                     <constraint firstItem="rNY-8Q-ITO" firstAttribute="leading" secondItem="Eaa-59-gOV" secondAttribute="trailing" constant="20" id="w93-eY-IGo"/>
+                    <constraint firstItem="rNY-8Q-ITO" firstAttribute="top" secondItem="lRY-T3-8Hp" secondAttribute="bottom" constant="3.5" id="wv0-aQ-uIk"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

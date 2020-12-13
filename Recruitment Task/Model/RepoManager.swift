@@ -4,6 +4,7 @@
 //
 //  Created by Chris Yarosh on 13/12/2020.
 //
+//# FILE NEEDED FOR PERFORIMG DATA ACTIONS FOR THE FirstController
 
 import Foundation
 
@@ -13,16 +14,16 @@ protocol RepoManagerDelegate {
 
 
 struct RepoManager {
-
     var delegate: RepoManagerDelegate?
     
-    func fetchRepos (for query: String = "Swift"){
-        let queryURL = "https://api.github.com/search/repositories?q=swift&per_page=7"
+    //# Function for fetching repository data from the web
+    func fetchRepos (for query: String = "swift"){
+        let queryURL = "https://api.github.com/search/repositories?q=\(query)&per_page=7"
         DispatchQueue.global(qos: .userInitiated).async {
             self.performRequest(with: queryURL)
         }
     }
-    
+    //# Function  that performs the URL request and provieds back the data
     func performRequest(with urlString:String) {
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
@@ -44,7 +45,7 @@ struct RepoManager {
             task.resume()
         }
     }
-    
+    //# Function that decodes the json file converts the data into RepoModel objects and sends it to the delegate to update user interface
     func decodeJSON(from data:RepoData){
         var repositories: [RepoModel] = []
         for item in data.items{

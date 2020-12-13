@@ -4,27 +4,20 @@
 //
 //  Created by Chris Yarosh on 10/12/2020.
 //
+// COMMENT REGARDING THE SCALED IMAGE:
+//      I would use "aspect fit" given that all of avatars' images are squares it would look much more natural.
+//      For the purpose of showing that I did change the color of the battery and time from back to white and to be closer to the image that was provided for this task
+//      I left the image.comtentMode setting left on "scale to fill".
 
 import UIKit
 
-class SecondController: UIViewController, RepoManagerDelegate, CommitManagerDelegate {
-    
-//    var repoPhotoURL: String = ""
-//    var chosenRepoAuthorname: String = "Repo Author Name"
-//    var numberOfStars: String = "234"
-//    var chosenRepoTitle: String = "Repo Title"
-//    var repoURL: String = ""
-    
-    var repoNumber: Int = 0
-    
-    var commitsURL: String = ""
-    
-    var repoManager = RepoManager()
-    
-    var commitManager = CommitManager()
+class SecondController: UIViewController {
     
     var commits: [CommitModel] = []
     
+    var commitManager = CommitManager() // Creates an instance of commitManager object
+    
+    //# All the outlets from the storyBoard
     @IBOutlet weak var viewOnlineButton: UIButton!
     @IBOutlet weak var shareRepoButton: UIButton!
     @IBOutlet weak var repoAuthorName: UILabel!
@@ -33,150 +26,95 @@ class SecondController: UIViewController, RepoManagerDelegate, CommitManagerDele
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imageView: UIImageView!
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barStyle = .black //These two lines changes the batery color to white
+    //# These two lines changes the batery color to white
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.tintColor = UIColor.white
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "CommitCell", bundle: nil), forCellReuseIdentifier: "CommitCell")
+        //# Ajdustments made to User Interface
+        viewOnlineButton.layer.cornerRadius = 15
+        shareRepoButton.layer.cornerRadius = 10
         tableView.estimatedRowHeight = 90.0
         tableView.rowHeight = UITableView.automaticDimension
         
-        viewOnlineButton.layer.cornerRadius = 15
-        shareRepoButton.layer.cornerRadius = 10
         
-//        repoAuthorName.text = chosenRepoAuthorname
-//        starsLabel.text = "Number of Stars (\(numberOfStars))"
-//        repoTitle.text = chosenRepoTitle
-//        imageView.downloaded(from: repoPhotoURL)
+        //# TableView implementation requirements
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "CommitCell", bundle: nil), forCellReuseIdentifier: "CommitCell") // required action to use the custom tableView Cell
         
-        repoManager.delegate = self
-        repoManager.fetchRepos()
-        
+        //# MVC implementatnion - connecting to Model
         commitManager.delegate = self
-        commitManager.fetchCommits(from: commitsURL)
-        
-        navigationController?.navigationBar.tintColor = UIColor.white //These two lines change the batery color to white
-        
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            self.performRequest(with: self.commitsURL)
-//        }
-
+        if let repo = commitManager.repository {
+            
+            commitManager.fetchCommits(from: repo.commits_url)// Privides commits for the chosen repository
+        }
     }
+
+    //# Implementatnion of ViewOnline Button - where it takes user to Safari broser and opens repository's url
+    @IBAction func viewOnlineButtonPressed(_ sender: UIButton) {
+        if let repo = commitManager.repository {
+            if let url = URL(string: repo.html_url ) {
+                UIApplication.shared.open(url)
+            }
+        }
+    }
+
+    //# Implementatnion of ShareRepo Button - it opens activity view controller and allows shareing the link and the name of the repository
+    @IBAction func shareRepoButtonPressed(_ sender: UIButton) {
+        if let repo = commitManager.repository {
+            let firstActivityItem = repo.repoName
+            let secondActivityItem : NSURL = NSURL(string: repo.html_url)!
+            let image: UIImage = imageView.image!
+            let activityViewController : UIActivityViewController = UIActivityViewController(
+                activityItems: [firstActivityItem, secondActivityItem, image], applicationActivities: nil)
+
+            // Pre-configuring activity items
+            activityViewController.activityItemsConfiguration = [
+            UIActivity.ActivityType.message
+            ] as? UIActivityItemsConfigurationReading
+
+            // Anything you want to exclude
+            activityViewController.excludedActivityTypes = [
+                UIActivity.ActivityType.postToWeibo,
+                UIActivity.ActivityType.print,
+                UIActivity.ActivityType.assignToContact,
+                UIActivity.ActivityType.saveToCameraRoll,
+                UIActivity.ActivityType.addToReadingList,
+                UIActivity.ActivityType.postToFlickr,
+                UIActivity.ActivityType.postToVimeo,
+                UIActivity.ActivityType.postToTencentWeibo,
+                UIActivity.ActivityType.postToFacebook
+            ]
+
+            activityViewController.isModalInPresentation = true
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+}
+
+//MARK: - CommitManagerDelegate Methods
+extension SecondController: CommitManagerDelegate{
     
-    // For Commit Manager
+    //# Implementatnon of the protocol - it is triggered only when the URLRequest & jsonDecoding have been successful
     func updateUI(with list: [CommitModel] ) {
+        //# Populates the tableView with 3 recent commits
         commits = list
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            //# Populates the outlets with the data provided for the chosen repository
+            if let repo = self.commitManager.repository{
+                self.repoAuthorName.text = repo.repoOwner
+                self.starsLabel.text = "Number of Stars (\(repo.starNumber))"
+                self.repoTitle.text = repo.repoName
+                self.imageView.downloaded(from: repo.repoOwnerAvarat)
+            }
         }
     }
-    
-    
-    // For Repo Manager
-    func updateUI(with list: [RepoModel]) {
-        DispatchQueue.main.async {
-            self.repoAuthorName.text = list[self.repoNumber].repoOwner
-            self.starsLabel.text = "Number of Stars (\(list[self.repoNumber].starNumber)"
-            self.repoTitle.text = list[self.repoNumber].repoName
-            self.imageView.downloaded(from: list[self.repoNumber].repoOwnerAvarat)
-        }
-        
-//###############################################################################
-//        commitsURL = list[repoNumber].commits_url
-//        repoURL = list[repoNumber].html_url
-//        chosenRepoTitle = list[repoNumber].repoName
-//
-    }
-
-//    @IBAction func viewOnlineButtonPressed(_ sender: UIButton) {
-//        if let url = URL(string: repoURL) {
-//            UIApplication.shared.open(url)
-//        }
-//    }
-
-    
-//    @IBAction func shareRepoButtonPressed(_ sender: UIButton) {
-//
-//            let firstActivityItem = chosenRepoTitle
-//
-//            let secondActivityItem : NSURL = NSURL(string: repoURL)!
-//
-//            let image: UIImage = imageView.image!
-//
-//            let activityViewController : UIActivityViewController = UIActivityViewController(
-//                activityItems: [firstActivityItem, secondActivityItem, image], applicationActivities: nil)
-//
-//            // This lines is for the popover you need to show in iPad
-//            activityViewController.popoverPresentationController?.sourceView = self.view
-//            // This line remove the arrow of the popover to show in iPad
-//
-//
-//            // Pre-configuring activity items
-//            activityViewController.activityItemsConfiguration = [
-//            UIActivity.ActivityType.message
-//            ] as? UIActivityItemsConfigurationReading
-//
-//            // Anything you want to exclude
-//            activityViewController.excludedActivityTypes = [
-//                UIActivity.ActivityType.postToWeibo,
-//                UIActivity.ActivityType.print,
-//                UIActivity.ActivityType.assignToContact,
-//                UIActivity.ActivityType.saveToCameraRoll,
-//                UIActivity.ActivityType.addToReadingList,
-//                UIActivity.ActivityType.postToFlickr,
-//                UIActivity.ActivityType.postToVimeo,
-//                UIActivity.ActivityType.postToTencentWeibo,
-//                UIActivity.ActivityType.postToFacebook
-//            ]
-//
-//            activityViewController.isModalInPresentation = true
-//            self.present(activityViewController, animated: true, completion: nil)
-//
-//    }
-    
-//    func performRequest(with urlString:String) {
-//        let adjustedURL = urlString.replacingOccurrences(of: "{/sha}", with: "?per_page=3")
-//        if let url = URL(string: adjustedURL){
-//
-//            let session = URLSession(configuration: .default)
-//
-//            let task = session.dataTask(with: url) { (data, response, error) in
-//                if error != nil{
-//                    print(error!)
-//                    return
-//                }
-//
-//                if let safeData = data{
-//                    let jsonDecoder = JSONDecoder()
-//                    do {
-//                        let decodedData = try jsonDecoder.decode([CommitData].self, from: safeData)
-//                        self.decodeJSON(from: decodedData)
-//
-//                    } catch {
-//                        print(error)
-//                    }
-//                }
-//            }
-//            task.resume()
-//        }
-//    }
-    
-//    func decodeJSON(from data:[CommitData]){
-//        for item in data{
-//            commits.append(CommitModel(authorName: item.commit.author.name, authorEmail: item.commit.author.email, commitMessage: item.commit.message))
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
-    
 }
-
 
 
 //MARK: - TableView DataSource Methods
