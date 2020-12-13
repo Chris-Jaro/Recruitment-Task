@@ -102,10 +102,14 @@ extension FirstController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath) as! RepositoryCell
         cell.layer.cornerRadius = 15
-        cell.repoTitle.text = repositories[indexPath.section].repoName
-        cell.starsNumber.text = "\(repositories[indexPath.section].starNumber)"
-        cell.photo.layer.cornerRadius = 10
-        cell.photo.downloaded(from: repositories[indexPath.section].repoOwnerAvarat)
+        if repositories.count > 0 {
+            cell.repoTitle.text = repositories[indexPath.section].repoName
+            cell.starsNumber.text = "\(repositories[indexPath.section].starNumber)"
+            cell.photo.layer.cornerRadius = 10
+            cell.photo.downloaded(from: repositories[indexPath.section].repoOwnerAvarat)
+        } else {
+            cell.repoTitle.text = "NO REPOS FOUND"
+        }
         return cell
     }
     
