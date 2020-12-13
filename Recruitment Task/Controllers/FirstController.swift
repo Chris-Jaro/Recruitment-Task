@@ -91,8 +91,9 @@ class FirstController: UIViewController, RepoManagerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToTwo" {
-            if let desinationVC = segue.destination as? SecondController{
-                desinationVC.repoNumber = selectedSection
+            if let destinationVC = segue.destination as? SecondController{
+                destinationVC.repoNumber = selectedSection
+                destinationVC.commitsURL = repositories[selectedSection].commits_url
 //                desinationVC.commitsURL = clickedRepoCommitsURL
 //                desinationVC.repoURL = clickedRepoURL
 //                desinationVC.chosenRepoAuthorname = clickedRepoAuthorName

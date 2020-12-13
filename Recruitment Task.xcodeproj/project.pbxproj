@@ -23,6 +23,7 @@
 		83CB4B1E258505DA000800FD /* RepoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB4B1D258505DA000800FD /* RepoData.swift */; };
 		83CB4B2125850A4C000800FD /* RepoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB4B2025850A4C000800FD /* RepoModel.swift */; };
 		83E694CB2586807F003A2473 /* RepoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E694CA2586807F003A2473 /* RepoManager.swift */; };
+		83E694CE25868FC5003A2473 /* CommitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E694CD25868FC5003A2473 /* CommitManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		83CB4B1D258505DA000800FD /* RepoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoData.swift; sourceTree = "<group>"; };
 		83CB4B2025850A4C000800FD /* RepoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoModel.swift; sourceTree = "<group>"; };
 		83E694CA2586807F003A2473 /* RepoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoManager.swift; sourceTree = "<group>"; };
+		83E694CD25868FC5003A2473 /* CommitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				83525DE425855286006ADD2D /* CommitData.swift */,
 				83525DE7258553F1006ADD2D /* CommitModel.swift */,
 				83E694CA2586807F003A2473 /* RepoManager.swift */,
+				83E694CD25868FC5003A2473 /* CommitManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				83A7EB4325829D1A0014A5D2 /* RepositoryCell.swift in Sources */,
 				83CB4B2125850A4C000800FD /* RepoModel.swift in Sources */,
+				83E694CE25868FC5003A2473 /* CommitManager.swift in Sources */,
 				83A7EB2A258288F20014A5D2 /* FirstController.swift in Sources */,
 				8315B6912583E95400BCCE85 /* CommitCell.swift in Sources */,
 				83525DE8258553F1006ADD2D /* CommitModel.swift in Sources */,

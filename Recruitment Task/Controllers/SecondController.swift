@@ -7,20 +7,23 @@
 
 import UIKit
 
-class SecondController: UIViewController, RepoManagerDelegate {
+class SecondController: UIViewController, RepoManagerDelegate, CommitManagerDelegate {
     
 //    var repoPhotoURL: String = ""
 //    var chosenRepoAuthorname: String = "Repo Author Name"
 //    var numberOfStars: String = "234"
 //    var chosenRepoTitle: String = "Repo Title"
-//    var commitsURL: String = ""
 //    var repoURL: String = ""
     
     var repoNumber: Int = 0
     
+    var commitsURL: String = ""
+    
     var repoManager = RepoManager()
     
-//    var commits: [CommitModel] = []
+    var commitManager = CommitManager()
+    
+    var commits: [CommitModel] = []
     
     @IBOutlet weak var viewOnlineButton: UIButton!
     @IBOutlet weak var shareRepoButton: UIButton!
@@ -38,7 +41,7 @@ class SecondController: UIViewController, RepoManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tableView.dataSource = self
+        tableView.dataSource = self
         tableView.register(UINib(nibName: "CommitCell", bundle: nil), forCellReuseIdentifier: "CommitCell")
         tableView.estimatedRowHeight = 90.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -54,6 +57,9 @@ class SecondController: UIViewController, RepoManagerDelegate {
         repoManager.delegate = self
         repoManager.fetchRepos()
         
+        commitManager.delegate = self
+        commitManager.fetchCommits(from: commitsURL)
+        
         navigationController?.navigationBar.tintColor = UIColor.white //These two lines change the batery color to white
         
 //        DispatchQueue.global(qos: .userInitiated).async {
@@ -62,6 +68,16 @@ class SecondController: UIViewController, RepoManagerDelegate {
 
     }
     
+    // For Commit Manager
+    func updateUI(with list: [CommitModel] ) {
+        commits = list
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    // For Repo Manager
     func updateUI(with list: [RepoModel]) {
         DispatchQueue.main.async {
             self.repoAuthorName.text = list[self.repoNumber].repoOwner
@@ -163,22 +179,22 @@ class SecondController: UIViewController, RepoManagerDelegate {
 
 
 
-////MARK: - TableView DataSource Methods
-//extension SecondController: UITableViewDataSource{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return commits.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "CommitCell", for: indexPath) as! CommitCell
-//        cell.numberLabel.text = "\(indexPath.row + 1)"
-//        cell.numberLabel.layer.cornerRadius = 20
-//        
-//        cell.emailLabel.text = commits[indexPath.row].authorEmail
-//        cell.commitAuthorName.text = commits[indexPath.row].authorName.uppercased()
-//        cell.commitMessage.text = commits[indexPath.row].commitMessage
-//        
-//        return cell
-//    }
-//
-//}
+//MARK: - TableView DataSource Methods
+extension SecondController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return commits.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommitCell", for: indexPath) as! CommitCell
+        cell.numberLabel.text = "\(indexPath.row + 1)"
+        cell.numberLabel.layer.cornerRadius = 20
+        
+        cell.emailLabel.text = commits[indexPath.row].authorEmail
+        cell.commitAuthorName.text = commits[indexPath.row].authorName.uppercased()
+        cell.commitMessage.text = commits[indexPath.row].commitMessage
+        
+        return cell
+    }
+
+}
